@@ -1,9 +1,11 @@
-FROM centos:7
+# Use the official NGINX image from Docker Hub
+FROM nginx:latest
 
-RUN yum install httpd -y
+# Copy your website content to the image
+COPY ./index.html /usr/share/nginx/html/
 
-RUN yum install net-tools -y
+# Expose port 80 for HTTP
+EXPOSE 80
 
-RUN echo "Welcome to this Webpage" > /var/www/html/index.html
-
-WORKDIR /var/www/html
+# Start the NGINX server
+CMD ["nginx", "-g", "daemon off;"]
